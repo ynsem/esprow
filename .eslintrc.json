@@ -1,0 +1,183 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2021, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module", // Allows for the use of imports
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "ignorePatterns": ["**/prometheus/**", "vitest.config.ts", "playwright.config.ts", "**/*.spec.ts"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "simple-import-sort", "newline-destructuring"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "no-console": "warn",
+        "no-debugger": "warn",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+        "react/jsx-filename-extension": [
+          1,
+          { "extensions": [".jsx", ".ts", ".tsx", ".spec.ts"] }
+        ],
+        "import/order": "off",
+        "@typescript-eslint/no-unused-vars": [1, { "vars": "all", "argsIgnorePattern": "^_" }],
+        "no-unused-vars": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": 0,
+        "func-names": ["error", "as-needed"],
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/promise-function-async": "warn",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/lines-between-class-members": "off",
+        "no-tabs": ["error", { "allowIndentationTabs": true }],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "import/prefer-default-export": "off",
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"],
+        "class-methods-use-this": "off",
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ],
+        "no-param-reassign": [2, { "props": false }],
+        "prettier/prettier": 0,
+        "react/function-component-definition": [
+          2,
+          { "namedComponents": "arrow-function" }
+        ],
+        "object-curly-spacing": ["error", "always"],
+        "newline-destructuring/newline": ["warn", {"items": 2, "itemsWithRest": 2, "consistent": false}],
+        "array-bracket-spacing": ["error", "always"],
+        "computed-property-spacing": ["error", "never"],
+        "no-return-await": 0,
+        "@typescript-eslint/comma-dangle": [
+          "warn",
+          {
+            "arrays": "always-multiline",
+            "enums": "always-multiline",
+            "exports": "always-multiline",
+            "generics": "never",
+            "functions": "never",
+            "imports": "never",
+            "objects": "always-multiline",
+            "tuples": "never"
+          }
+        ],
+        "@typescript-eslint/unbound-method": [
+          "error",
+          { "ignoreStatic": true }
+        ],
+        "arrow-parens": ["error", "as-needed"],
+        "arrow-spacing": ["error", { "before": true, "after": true }],
+        "comma-dangle": "off",
+        "lines-between-class-members": [
+          "error",
+          "always",
+          { "exceptAfterSingleLine": true }
+        ],
+        "no-continue": "off",
+        "no-nested-ternary": "warn",
+        "no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "LabeledStatement",
+            "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+          },
+          {
+            "selector": "WithStatement",
+            "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+          }
+        ],
+        "no-underscore-dangle": "off",
+        "object-curly-newline": "off",
+        "object-shorthand": [
+          "error",
+          "always",
+          { "ignoreConstructors": false, "avoidQuotes": true }
+        ],
+        "react/jsx-props-no-spreading": "off",
+        // "sort-keys": "warn",
+        "@typescript-eslint/no-unnecessary-type-assertion": 0,
+        "react/prop-types": "off",
+        "react/require-default-props": "off",
+        "react/jsx-first-prop-new-line": [1, "multiline"],
+        "react/jsx-max-props-per-line": [1, { "maximum": { "multi": 1, "single": 3 } }],
+        "react/jsx-closing-bracket-location": [1, "line-aligned"],
+        "react/no-array-index-key": "off",
+        "import/no-anonymous-default-export": "error",
+        "import/extensions": "off",
+        "@typescript-eslint/no-misused-promises": [
+          "error",
+          {
+            "checksConditionals": false,
+            "checksVoidReturn": false
+          }
+        ],
+
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "import/no-duplicates": "error",
+        "comma-spacing": ["error", { "before": false, "after": true }],
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              ["^react", "^@?\\w"],
+              ["^@/libs/Ui?(/.*|$)", "components", "^(..|.)/([A-Z][a-z0-9]+)+"],
+              [ "@/api","context", "utils", "hook", "helpers", "use([A-Z][a-z0-9]+)"],
+              [
+                "^@/(constants|configs|theme)?(/.*|$)",
+                "(constants|configs)",
+                "generated-types/\\w+.type$",
+                "^@/types?(/.*|$)",
+                "types",
+                "^@/(enums|router/RoutePath)?(/.*|$)",
+                "(enum|RoutePath)",
+                "^@/(models)?(/.*|$)",
+                "models"
+              ],
+              ["/\\w+.(style|styles)$", "css$"]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
+}
