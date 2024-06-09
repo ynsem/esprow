@@ -5,8 +5,10 @@ import JsonTable from '../JsonTable'
 
 import { download } from '../../helpers/download'
 
+import { type JsonData } from '../../types'
+
 const JsonUploader = () => {
-  const [ jsonData, setJsonData ] = useState<object[] | null>(null)
+  const [ jsonData, setJsonData ] = useState<JsonData[] | null>(null)
   const [ error, setError ] = useState<string | null>(null)
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,15 +33,19 @@ const JsonUploader = () => {
     }
   }
 
-  const handleDataChange = (updatedData: object[]) => {
+  const handleDataChange = (updatedData: JsonData[]) => {
     setJsonData(updatedData)
   }
 
   return (
-    <div className='wrapper'>
-      <input type='file' accept='.json' onChange={handleFileUpload} />
-      {error && <p className='error'>{error}</p>}
-      {jsonData && <button type='button' onClick={() => download(jsonData)}>Загрузить измененные данные</button>}
+    <div className="wrapper">
+      <input type="file" accept=".json" onChange={handleFileUpload} />
+      {error && <p className="error">{error}</p>}
+      {jsonData && (
+        <button type="button" onClick={() => download(jsonData)}>
+          Загрузить измененные данные
+        </button>
+      )}
       {jsonData && <JsonTable data={jsonData} onDataChange={handleDataChange} />}
     </div>
   )
