@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { FixedSizeList as List, ListChildComponentProps } from 'react-window'
 
 import { type JsonData } from '../../types'
 
@@ -15,8 +16,8 @@ const JsonTable: React.FC<JsonTableProps> = ({ data, onDataChange }) => {
   }, [ data ])
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, 
-    rowIndex: number, 
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    rowIndex: number,
     key: string
   ) => {
     const newData = [ ...tableData ]
@@ -83,25 +84,29 @@ const JsonTable: React.FC<JsonTableProps> = ({ data, onDataChange }) => {
     return <span>{value}</span>
   }
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          {Object.keys(tableData[0]).map(key => (
-            <th key={key}>{key}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {tableData.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {Object.keys(row).map(key => (
-              <td key={key}>{renderInputField(row[key], rowIndex, key)}</td>
+  const Row = ({ index, style }: ListChildComponentProps) => (
+    <div style={style}>
+      <table>
+        <tbody>
+          <tr key={index}>
+            {Object.keys(tableData[index]).map(key => (
+              <td key={key}>{renderInputField(tableData[index][key], index, key)}</td>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
+  )
+
+  return (
+    <List
+      height={600}
+      itemCount={tableData.length}
+      itemSize={50}
+      width="100%"
+    >
+      {Row}
+    </List>
   )
 }
 

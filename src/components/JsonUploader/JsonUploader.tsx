@@ -22,10 +22,10 @@ const JsonUploader = () => {
             setJsonData(result)
             setError(null)
           } else {
-            console.error('error')
+            console.error('Загруженный файл не является допустимым JSON массивом.')
           }
         } catch (err) {
-          setError('error')
+          setError('Неверный JSON файл.')
           setJsonData(null)
         }
       }
